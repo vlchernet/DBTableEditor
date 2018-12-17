@@ -20,7 +20,7 @@ namespace DBTableEditor
             SqlDataReader sqlReader = null;
             SqlCommand command = new SqlCommand("SELECT * FROM [Subject]", sqlConnection);
             sqlReader = command.ExecuteReader();
-            listBox1.Items.Add(Convert.ToString("Id" + "     " + "Name"));
+            listBox1.Items.Add("Id" + "     " + "Name");
             listBox1.Items.Add("======================================");
             while (sqlReader.Read())
             {
