@@ -38,6 +38,7 @@ namespace DBTableEditor
             SqlCommand command = new SqlCommand("INSERT INTO [Subject] (Name) VALUES (@Name)", sqlConnection);
             command.Parameters.AddWithValue("Name", textBox1.Text);
             command.ExecuteNonQuery();
+            refreshToolStripMenuItem_Click(sender, e);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace DBTableEditor
             command.Parameters.AddWithValue("Id", textBox3.Text);
             command.Parameters.AddWithValue("Name", textBox2.Text);
             command.ExecuteNonQuery();
+            refreshToolStripMenuItem_Click(sender, e);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -59,6 +61,7 @@ namespace DBTableEditor
             SqlCommand command = new SqlCommand("DELETE FROM [Subject] WHERE [Id] = @Id", sqlConnection);
             command.Parameters.AddWithValue("Id", textBox4.Text);
             command.ExecuteNonQuery();
+            refreshToolStripMenuItem_Click(sender, e);
         }
     }
 }
