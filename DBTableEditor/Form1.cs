@@ -10,23 +10,14 @@ namespace DBTableEditor
         public Form1()
         {
             InitializeComponent();
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\work\C#exercises\DBTableEditor-master\DBTableEditor\Database1.mdf;Integrated Security=True";
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\C#exercises\DBTableEditor\DBTableEditor\Database1.mdf;Integrated Security=True";
-            sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.Open();
-            SqlDataReader sqlReader = null;
-            SqlCommand command = new SqlCommand("SELECT * FROM [Subject]", sqlConnection);
-            sqlReader = command.ExecuteReader();
-            listBox1.Items.Add("Id" + "     " + "Name");
-            listBox1.Items.Add("======================================");
-            while (sqlReader.Read())
-            {
-                listBox1.Items.Add(Convert.ToString(sqlReader["Id"]) + "     " + Convert.ToString(sqlReader["Name"]));
-            }
-            sqlReader.Close();
+            refreshToolStripMenuItem_Click(sender, e);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,9 +35,18 @@ namespace DBTableEditor
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {    
+            SqlDataReader sqlReader = null;
+            SqlCommand command = new SqlCommand("SELECT * FROM [Subject]", sqlConnection);
+            sqlReader = command.ExecuteReader();
             listBox1.Items.Clear();
-            Form1_Load(sender, e);
+            listBox1.Items.Add("Id" + "     " + "Name");
+            listBox1.Items.Add("======================================");
+            while (sqlReader.Read())
+            {
+                listBox1.Items.Add(Convert.ToString(sqlReader["Id"]) + "     " + Convert.ToString(sqlReader["Name"]));
+            }
+            sqlReader.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
